@@ -8,12 +8,12 @@
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
             font-family: 'Arial', sans-serif;
             color: #fff;
             background: #000;
+            height: auto;
+            overflow-y: scroll; /* Scroll aktif */
             overflow-x: hidden;
-            overflow-y: auto; /* Scroll aktif */
         }
 
         header {
@@ -113,7 +113,7 @@
 
         /* Beyaz nokta partiküller */
         .stars {
-            position: fixed;
+            position: absolute; /* fixed yerine absolute */
             top: 0;
             left: 0;
             width: 100%;
