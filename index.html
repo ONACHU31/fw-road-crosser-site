@@ -1,195 +1,176 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Onachu Studios</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      overflow-x: hidden;
-      background: #111;
-      color: white;
-    }
-    #canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-    header {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 60px;
-      margin-bottom: 20px;
-      animation: glow 2s infinite alternate;
-    }
-    header p {
-      font-size: 24px;
-      margin-bottom: 40px;
-      max-width: 80%;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #ff3b3b; }
-      to { text-shadow: 0 0 20px #ff7070; }
-    }
-    .btn {
-      background: #ff3b3b;
-      padding: 15px 40px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background 0.3s;
-      z-index: 1;
-    }
-    .btn:hover {
-      background: #ff7070;
-    }
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 100px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-    section p {
-      font-size: 20px;
-      line-height: 1.6;
-      color: #ccc;
-    }
-    a.game-link {
-      color: #ff3b3b;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a.game-link:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      background: #222;
-      color: #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoLand Studios</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            background: #000; /* Siyah arka plan */
+        }
+        header {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(20,20,20,0.9);
+            padding: 25px;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+        }
+        nav {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 18px;
+            background-color: rgba(30,30,30,0.95);
+            font-weight: bold;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff4b5c;
+        }
+        main {
+            position: relative;
+            z-index: 2;
+            padding: 50px;
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6em;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            margin: 10px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #ff4b5c;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #ff1f3d;
+        }
+        footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(20,20,20,0.9);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+            margin-top: 50px;
+        }
+        section {
+            margin-bottom: 50px;
+        }
+        .game-link a {
+            color: #ff4b5c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .game-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Beyaz nokta partiküller */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float 10s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+            100% { transform: translateY(-1200px) translateX(200px); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
+    <!-- Beyaz nokta partiküller -->
+    <div class="stars" id="stars"></div>
 
-  <header>
-    <h1>Onachu Studios</h1>
-    <p>Onachu Studios'un resmi tanıtım sitesi demo versiyonu.</p>
-    <div class="btn" onclick="scrollToSection('about');">Hakkımızda</div>
-  </header>
+    <header>NeoLand Studios</header>
+    <nav>
+        <a href="#about">Hakkında</a>
+        <a href="#game">Oyun</a>
+        <a href="#contact">İletişim</a>
+    </nav>
+    <main>
+        <section id="about">
+            <h1>Hakkımızda</h1>
+            <p>NeoLand Studios, eğlence ve oyun dünyasına yeni bir soluk getirmek için kurulmuş bir platformdur.  
+            Amacımız, yaratıcı ve eğlenceli oyun deneyimleri sunarak kullanıcılarımıza unutulmaz anlar yaşatmaktır.</p>
+        </section>
 
-  <section id="about">
-    <h2>Hakkımızda</h2>
-    <p>Bu site Onachu Studios tarafından yapılmıştır. Bu websitede Onachu Studios'un yaptığı oyunlar ve vesaire şeyler bulunmaktadır.</p>
-  </section>
+        <section id="game">
+            <h1>FW Road Crosser</h1>
+            <p>FW Road Crosser, reflekslerinizi ve hızınızı test eden bir mobil oyun deneyimidir.  
+            Arabaları atlat, engelleri aş ve en yüksek puanı elde etmeye çalış!</p>
+            <div class="game-link">
+                <p>Oyunu indirmek için tıkla:  
+                <a href="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?usp=drivesdk" target="_blank">FW Road Crosser APK</a></p>
+            </div>
+            <button class="btn" onclick="window.open('https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?usp=drivesdk','_blank')">Oyunu Oyna</button>
+        </section>
 
-  <section id="game">
-    <h2>FW: Road Crosser</h2>
-    <p>Onachu Studios tarafından geliştirilen <strong>FW: Road Crosser</strong> adlı oyunumuzun demo tanıtımı:</p>
-    <p><a class="game-link" href="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?usp=drivesdk" target="_blank">Oyunu İndir / İncele</a></p>
-    <p>FW: Road Crosser, reflekslerini ve hızını test eden bağımlılık yapan bir arcade oyunudur. Amacın basit: Engellerden kaç, yolları geç ve en yüksek puanı yap!</p>
-    <div style="margin-top: 20px;">
-      <iframe src="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/preview"
-        width="80%" height="480" style="border: none;" allow="autoplay">
-      </iframe>
-    </div>
-  </section>
+        <section id="contact">
+            <h1>İletişim</h1>
+            <p>Yakında getirilecektir. Anlayışınız için teşekkür ederiz.</p>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 NeoLand Studios. Tüm hakları saklıdır.
+    </footer>
 
-  <footer>
-    &copy; 2025 Onachu Studios | Tüm Hakları Saklıdır
-  </footer>
+    <script>
+        // Beyaz nokta partiküllerini rastgele oluştur
+        const starsContainer = document.getElementById('stars');
+        const totalStars = 50;
 
-  <script>
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      for (let i = 0; i < 200; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    initParticles();
-    animate();
-
-    const sections = document.querySelectorAll('section');
-    function checkSections(){
-      sections.forEach(sec => {
-        const top = sec.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
-          sec.classList.add('show');
+        for (let i = 0; i < totalStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = (2 + Math.random() * 3) + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDuration = (5 + Math.random() * 10) + 's';
+            starsContainer.appendChild(star);
         }
-      });
-    }
-    window.addEventListener('scroll', checkSections);
-
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({behavior: 'smooth'});
-    }
-  </script>
+    </script>
 </body>
 </html>
