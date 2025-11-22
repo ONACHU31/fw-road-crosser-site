@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeoLand Studios</title>
     <style>
-        body {
+        html, body {
             margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: 'Arial', sans-serif;
             color: #fff;
-            overflow: hidden;
-            background: #000; /* Siyah arka plan */
+            background: #000;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scroll aktif */
         }
+
         header {
             position: relative;
             z-index: 2;
@@ -22,6 +26,7 @@
             font-weight: bold;
             box-shadow: 0 3px 8px rgba(0,0,0,0.5);
         }
+
         nav {
             position: relative;
             z-index: 2;
@@ -31,32 +36,39 @@
             padding: 18px;
             background-color: rgba(30,30,30,0.95);
             font-weight: bold;
+            flex-wrap: wrap;
         }
+
         nav a {
             text-decoration: none;
             color: #fff;
             transition: color 0.3s;
         }
+
         nav a:hover {
             color: #ff4b5c;
         }
+
         main {
             position: relative;
             z-index: 2;
-            padding: 50px;
+            padding: 50px 20px;
             max-width: 1000px;
             margin: auto;
             text-align: center;
         }
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 15px;
         }
+
         p {
             font-size: 1.2em;
             line-height: 1.6em;
             margin-bottom: 25px;
         }
+
         .btn {
             display: inline-block;
             padding: 15px 35px;
@@ -69,10 +81,12 @@
             cursor: pointer;
             transition: transform 0.2s, background-color 0.3s;
         }
+
         .btn:hover {
             transform: scale(1.05);
             background-color: #ff1f3d;
         }
+
         footer {
             position: relative;
             z-index: 2;
@@ -82,14 +96,17 @@
             box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
             margin-top: 50px;
         }
+
         section {
             margin-bottom: 50px;
         }
+
         .game-link a {
             color: #ff4b5c;
             text-decoration: none;
             font-weight: bold;
         }
+
         .game-link a:hover {
             text-decoration: underline;
         }
@@ -104,6 +121,7 @@
             z-index: 1;
             pointer-events: none;
         }
+
         .star {
             position: absolute;
             width: 3px;
@@ -113,6 +131,7 @@
             opacity: 0.8;
             animation: float 10s linear infinite;
         }
+
         @keyframes float {
             0% { transform: translateY(0) translateX(0); opacity: 0.8; }
             100% { transform: translateY(-1200px) translateX(200px); opacity: 0; }
@@ -129,6 +148,7 @@
         <a href="#game">Oyun</a>
         <a href="#contact">İletişim</a>
     </nav>
+
     <main>
         <section id="about">
             <h1>Hakkımızda</h1>
@@ -152,6 +172,7 @@
             <p>Yakında getirilecektir. Anlayışınız için teşekkür ederiz.</p>
         </section>
     </main>
+
     <footer>
         &copy; 2025 NeoLand Studios. Tüm hakları saklıdır.
     </footer>
