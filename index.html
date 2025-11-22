@@ -1,93 +1,195 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FW: Road Crosser</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: #fff;
-            text-align: center;
-        }
-        header {
-            padding: 40px 20px;
-            background: #1a1a1a;
-        }
-        h1 {
-            margin: 0;
-            font-size: 42px;
-            letter-spacing: 1px;
-        }
-        p {
-            margin-top: 10px;
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        .download-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 14px 26px;
-            background: #ffcc00;
-            color: #000;
-            font-weight: bold;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 20px;
-        }
-        .section {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        .screenshots {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .screenshots img {
-            width: 260px;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid #444;
-        }
-        footer {
-            padding: 20px;
-            margin-top: 40px;
-            background: #1a1a1a;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Onachu Studios</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      background: #111;
+      color: white;
+    }
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+    header p {
+      font-size: 24px;
+      margin-bottom: 40px;
+      max-width: 80%;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff3b3b; }
+      to { text-shadow: 0 0 20px #ff7070; }
+    }
+    .btn {
+      background: #ff3b3b;
+      padding: 15px 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s;
+      z-index: 1;
+    }
+    .btn:hover {
+      background: #ff7070;
+    }
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    section p {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+    a.game-link {
+      color: #ff3b3b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.game-link:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #222;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>FW: Road Crosser</h1>
-        <p>Follow Week Road Crosser - Yeni nesil arcade macerasına hoş geldin!</p>
-        <a class="download-btn" href="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?pli=1" target="_blank">APK İndir</a>
-    </header>
+  <canvas id="canvas"></canvas>
 
-    <div class="section">
-        <h2>Oyun Hakkında</h2>
-        <p>
-            FW: Road Crosser, reflekslerini ve hızını test eden bağımlılık yapan bir arcade oyunudur.
-            Amacın basit: Engellerden kaç, yolları geç ve en yüksek puanı yap!
-        </p>
+  <header>
+    <h1>Onachu Studios</h1>
+    <p>Onachu Studios'un resmi tanıtım sitesi demo versiyonu.</p>
+    <div class="btn" onclick="scrollToSection('about');">Hakkımızda</div>
+  </header>
+
+  <section id="about">
+    <h2>Hakkımızda</h2>
+    <p>Bu site Onachu Studios tarafından yapılmıştır. Bu websitede Onachu Studios'un yaptığı oyunlar ve vesaire şeyler bulunmaktadır.</p>
+  </section>
+
+  <section id="game">
+    <h2>FW: Road Crosser</h2>
+    <p>Onachu Studios tarafından geliştirilen <strong>FW: Road Crosser</strong> adlı oyunumuzun demo tanıtımı:</p>
+    <p><a class="game-link" href="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?usp=drivesdk" target="_blank">Oyunu İndir / İncele</a></p>
+    <p>FW: Road Crosser, reflekslerini ve hızını test eden bağımlılık yapan bir arcade oyunudur. Amacın basit: Engellerden kaç, yolları geç ve en yüksek puanı yap!</p>
+    <div style="margin-top: 20px;">
+      <iframe src="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/preview"
+        width="80%" height="480" style="border: none;" allow="autoplay">
+      </iframe>
     </div>
+  </section>
 
-    <div class="section">
-        <h2>Ekran Görüntüleri</h2>
-        <div class="screenshots">
-            <!-- Buraya istersen görseller ekleyebilirsin -->
-        </div>
-    </div>
+  <footer>
+    &copy; 2025 Onachu Studios | Tüm Hakları Saklıdır
+  </footer>
 
-    <footer>
-        © 2025 FW: Road Crosser — Tüm Hakları Saklıdır.
-    </footer>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < 200; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    initParticles();
+    animate();
+
+    const sections = document.querySelectorAll('section');
+    function checkSections(){
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+          sec.classList.add('show');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkSections);
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
 </body>
 </html>
