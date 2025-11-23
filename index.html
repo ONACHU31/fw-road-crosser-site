@@ -60,13 +60,19 @@
 
         h1 {
             font-size: 2.5em;
-            margin-bottom: 15px;
+            margin-bottom: 40px; /* Paragraflardan uzaklık */
+            color: #ff1f3d;
+            text-shadow:
+                0 0 5px #ff1f3d,
+                0 0 10px #ff1f3d,
+                0 0 20px #ff4b5c,
+                0 0 40px #ff4b5c;
         }
 
         p {
             font-size: 1.2em;
             line-height: 1.6em;
-            margin-bottom: 25px;
+            margin-bottom: 40px; /* Daha fazla boşluk */
         }
 
         .btn {
@@ -79,12 +85,13 @@
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.3s;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
         }
 
         .btn:hover {
             transform: scale(1.05);
             background-color: #ff1f3d;
+            box-shadow: 0 0 20px #ff4b5c;
         }
 
         footer {
@@ -136,14 +143,14 @@
     <main>
         <section id="about">
             <h1>Hakkımızda</h1>
-            <p>NeoLand Studios, eğlence ve oyun dünyasına yeni bir soluk getirmek için kurulmuş bir platformdur.  
-            Amacımız, yaratıcı ve eğlenceli oyun deneyimleri sunarak kullanıcılarımıza unutulmaz anlar yaşatmaktır.</p>
+            <p>NeoLand Studios, eğlence ve oyun dünyasına yeni bir soluk getirmek için kurulmuş bir platformdur.</p>
+            <p>Amacımız, yaratıcı ve eğlenceli oyun deneyimleri sunarak kullanıcılarımıza unutulmaz anlar yaşatmaktır.</p>
         </section>
 
         <section id="game">
             <h1>FW Road Crosser</h1>
-            <p>FW Road Crosser, reflekslerinizi ve hızınızı test eden bir mobil oyun deneyimidir.  
-            Arabaları atlat, engelleri aş ve en yüksek puanı elde etmeye çalış!</p>
+            <p>FW Road Crosser, reflekslerinizi ve hızınızı test eden bir mobil oyun deneyimidir.</p>
+            <p>Arabaları atlat, engelleri aş ve en yüksek puanı elde etmeye çalış!</p>
             <div class="game-link">
                 <p>Oyunu indirmek için tıkla:  
                 <a href="https://drive.google.com/file/d/1e1zF8Mr_cSg3xNaZQ3481xnghgHY6GsP/view?usp=drivesdk" target="_blank">FW Road Crosser APK</a></p>
@@ -168,14 +175,16 @@
         let height = canvas.height = window.innerHeight;
 
         const stars = [];
-        const numStars = 80;
+        const numStars = 100;
 
         for(let i=0;i<numStars;i++){
             stars.push({
                 x: Math.random()*width,
                 y: Math.random()*height,
                 r: Math.random()*2+1,
-                d: Math.random()*1
+                d: Math.random()*1,
+                speed: Math.random()*0.5+0.2,
+                dx: (Math.random()-0.5)*0.3
             });
         }
 
@@ -192,16 +201,14 @@
             updateStars();
         }
 
-        let angle = 0;
         function updateStars(){
-            angle += 0.01;
             for(let i=0;i<numStars;i++){
                 const s = stars[i];
-                s.y += Math.cos(angle+s.d)+0.5;
-                s.x += Math.sin(angle)*0.5;
+                s.y -= s.speed; 
+                s.x += s.dx;
+                if(s.y < 0) s.y = height;
                 if(s.x > width) s.x = 0;
                 if(s.x < 0) s.x = width;
-                if(s.y > height) s.y = 0;
             }
         }
 
